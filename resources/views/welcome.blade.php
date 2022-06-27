@@ -35,6 +35,9 @@
             .list ul a:hover {
                 text-decoration: none;
             }
+            .list-footer ul {
+                list-style: none;
+            }
 
         </style>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -436,7 +439,7 @@
 
         <div class="footer">
             <div class="row">
-                <div class="" style="background:#f7f7f7; height: 300px; width: 100%">
+                <div class="" style="background:#f7f7f7; width: 100%;padding-top: 14px">
                     <div class="list-footer">
                         <ul>
                             <li style="font-weight: bold; margin-bottom: 10px">INSIGHT</li>
