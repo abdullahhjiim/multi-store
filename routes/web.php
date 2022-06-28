@@ -22,5 +22,9 @@ Route::get('/single', function () {
     return view('single-page');
 });
 
+Route::get('/test', function () {
+    dd( htmlspecialchars('Product & ASL') );
+});
+
 Route::get( 'dashboard', [ DashboardController::class, 'index' ] );
 
