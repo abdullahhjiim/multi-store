@@ -35,7 +35,9 @@
 
     <!-- app-content-->
         <div class="app-content  my-3 my-md-5">
-            <div class="side-app">
+            <div class="side-app mt-7">
+
+
 
                 @yield('content')
 

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-3">
     <div class="col-sm-12 col-md-5">
         <div class="dataTables_info">
             Showing {{ $data->firstItem() }} to {{ $data->lastItem() }} of {{ $data->total() }} entries
