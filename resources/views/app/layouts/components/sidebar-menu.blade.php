@@ -20,6 +20,7 @@
                             <a href="#" data-toggle="sub-slide" class="side-menu__item"><i class="side-menu__icon fa fa-star"></i><span class="side-menu__label">Settings</span><i class="sub-angle fa fa-angle-right"></i></a>
                             <ul class="sub-slide-menu">
                                 <li><a class="sub-slide-item"  href="{{url('locations')}}"><span> Locations</span></a></li>
+                                <li><a class="sub-slide-item"  href="{{url('categories')}}"><span> Categories</span></a></li>
                             </ul>
                         </li>
 
