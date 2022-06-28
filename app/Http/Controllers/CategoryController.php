@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Location\CategoryService;
+use App\Services\Category\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class LocationController extends Controller
+class CategoryController extends Controller
 
 {
     protected $service;
