@@ -10,10 +10,10 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col">
-                            <h5 class="mb-5 text-uppercase font-weight-semibold">Location List</h5>
+                            <h5 class="mb-5 text-uppercase font-weight-semibold">Category List</h5>
                         </div>
                         <div class="col">
-                            <a id="createBtn" data-url="{{ route('locations.create') }}" data-title="Add Location" class="btn btn-app btn-indigo mb-3 float-right">
+                            <a id="createBtn" data-url="{{ route('categories.create') }}" data-title="Add Category" class="btn btn-app btn-indigo mb-3 float-right">
                                 <i class="fa fa-plus"></i> Create
                             </a>
                         </div>
@@ -21,7 +21,7 @@
 
                     <div class="row mb-1">
                         <div class="col-sm-12 col-xxl-12">
-                            <form action="{{ route('locations.index') }}">
+                            <form action="{{ route('categories.index') }}">
                                 <div class="row">
                                     <div class="form-group col-md-3">
                                         <div class="row {{ $errors->has('status')?'has-error':'' }}">
@@ -32,9 +32,9 @@
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="text" name="location_global_search" placeholder="Search"
+                                        <input type="text" name="category_global_search" placeholder="Search"
                                                class="form-control"
-                                               value="{{ request()->get('location_global_search') }}">
+                                               value="{{ request()->get('category_global_search') }}">
                                     </div>
                                     <div class="col-sm-3">
                                         <button type="submit" class="btn btn-app btn-indigo"><i
@@ -50,7 +50,7 @@
                     </div>
                     @include('app.partials.page_length')
                     <div class="table-responsive">
-                        @include('app.location.table', ['locations' => $data])
+                        @include('app.category.table', ['categories' => $data])
                     </div>
                     @include('app.partials.paginate')
                 </div>

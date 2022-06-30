@@ -4,10 +4,12 @@
 namespace App\Services\Category;
 
 
+use App\Enums\VisibilityStatus;
 use App\Models\Category;
 use App\Services\BaseService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CategoryService extends BaseService
 {
@@ -25,10 +27,7 @@ class CategoryService extends BaseService
 
         if (!empty($filters['category_global_search'])) {
             $query->where(function ($q) use ($filters) {
-                $q->orWhere(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['location_global_search']) . '%')
-                    ->orWhereHas('country', function ($q) use ($filters) {
-                        $q->where(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['location_global_search']) . '%');
-                    });
+                $q->orWhere(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['category_global_search']) . '%');
             });
         }
 
@@ -45,12 +44,12 @@ class CategoryService extends BaseService
 
     public function store(array $data)
     {
-        return $this->saveLocation($data);
+        return $this->saveCategory($data);
     }
 
     public function update($id, array $data)
     {
-        return $this->saveLocation($data, $id);
+        return $this->saveCategory($data, $id);
     }
 
     public function destroy($id)
@@ -58,13 +57,14 @@ class CategoryService extends BaseService
         return Category::find($id)->delete();
     }
 
-    private function saveLocation($data, $id = null)
+    private function saveCategory($data, $id = null)
     {
-        $location = Category::findOrNew($id);
-        $location->fill($data);
-//        $location->status = $data['status'] ?? VisibilityStatus::INACTIVE;
-        $location->save();
+        $category = Category::findOrNew($id);
+        $category->fill($data);
+        $category->slug = Str::slug($data['name']);
+        $category->status = Arr::get($data, 'status', VisibilityStatus::INACTIVE);
+        $category->save();
 
-        return $location;
+        return $category;
     }
 }

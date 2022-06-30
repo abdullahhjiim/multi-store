@@ -24,20 +24,11 @@ class LocationService extends BaseService
             $query->where(DB::raw('LOWER(name)'), 'LIKE', '%'. strtolower($filters['q']) .'%');
         }
 
-        if (!empty($filters['country'])) {
-            $query->where('country_id', $filters['country']);
-        }
-
         if (!empty($filters['location_global_search'])) {
             $query->where(function ($q) use ($filters) {
-                $q->orWhere(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['location_global_search']) . '%')
-                    ->orWhereHas('country', function ($q) use ($filters) {
-                        $q->where(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['location_global_search']) . '%');
-                    });
+                $q->orWhere(DB::raw('LOWER(name)'), 'LIKE', '%' . strtolower($filters['location_global_search']) . '%');
             });
         }
-
-//        $query->where('type', 1);
 
         $limit = Arr::get($filters, 'limit', 20);
 
@@ -68,7 +59,7 @@ class LocationService extends BaseService
     {
         $location = Location::findOrNew($id);
         $location->fill($data);
-//        $location->status = $data['status'] ?? VisibilityStatus::INACTIVE;
+        $location->status = $data['status'] ?? VisibilityStatus::INACTIVE;
         $location->save();
 
         return $location;

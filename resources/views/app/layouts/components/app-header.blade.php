@@ -1,9 +1,17 @@
 
 						<div class="d-flex">
 						    <a class="header-brand" href="{{url('index')}}">
-								<img src="{{URL::asset('uploads/images/logo.jpeg')}}" class="header-brand-img main-logo" alt="Olfat logo">
-								<img src="{{URL::asset('assets/images/brand/logo1.png')}}" class="header-brand-img darklogo" alt="Sparic logo">
-								<img src="{{URL::asset('assets/images/brand/icon.png')}}" class="header-brand-img icon-logo" alt="Sparic logo">
+{{--								<img src="{{URL::asset('assets/images/logo.jpeg')}}" class="header-brand-img main-logo" alt="Olfat logo">--}}
+{{--								<img src="{{URL::asset('assets/images/brand/logo1.png')}}" class="header-brand-img darklogo" alt="Sparic logo">--}}
+{{--								<img src="{{URL::asset('assets/images/brand/icon.png')}}" class="header-brand-img icon-logo" alt="Sparic logo">--}}
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -2 512 522" width="40" height="40">
+                                        <path fill="none" d="M0 0h512v512H0z"></path>
+                                        <path d="M257-3a256 256 0 110 512 256 256 0 010-512zm1.5 79a178.5 178.5 0 100 357 178.5 178.5 0 000-357z" fill="#1D1D1B"></path>
+                                        <path d="M-16-12zm138.3 414l173-103.8-69.4-68.2-103.6 172z" fill="#999"></path>
+                                        <path d="M404 120L231 223.8l69.4 68.2L404 120z" fill="#D9217D"></path>
+                                    </svg>
+
 							</a><!-- logo-->
 							<a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-toggle="sidebar" href="#"></a>
 							<a href="#" data-toggle="search" class="nav-link nav-link  navsearch"><i class="fa fa-search"></i></a><!-- search icon -->
