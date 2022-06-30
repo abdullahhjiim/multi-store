@@ -30,8 +30,10 @@
 
 		<!-- Rightsidebar js -->
 		<script src="{{URL::asset('assets/plugins/sidebar/sidebar.js')}}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js" defer></script>
 
-		@yield('scripts')
+
+        @yield('scripts')
 
 		<!-- Custom js-->
 		<script src="{{URL::asset('assets/js/custom.js')}}"></script>

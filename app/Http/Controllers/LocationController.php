@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Location\CategoryService;
+use App\Services\Location\LocationService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -14,9 +14,9 @@ class LocationController extends Controller
     /**
      * LocationController constructor.
      *
-     * @param CategoryService $service
+     * @param LocationService $service
      */
-    public function __construct( CategoryService $service ) {
+    public function __construct( LocationService $service ) {
         $this->service = $service;
     }
 
@@ -100,7 +100,7 @@ class LocationController extends Controller
      */
     public function update( $id, Request $request ) {
         $this->validate( $request, [
-            'location_name' => 'required',
+            'name' => 'required',
         ] );
 
         try {

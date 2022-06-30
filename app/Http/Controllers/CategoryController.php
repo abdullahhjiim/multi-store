@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Category\CategoryService;
+use App\Services\Storage\FileManager;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -12,7 +13,7 @@ class CategoryController extends Controller
     protected $service;
 
     /**
-     * LocationController constructor.
+     * CategoryController constructor.
      *
      * @param CategoryService $service
      */
@@ -28,7 +29,7 @@ class CategoryController extends Controller
     public function index( Request $request ) {
         $data = $this->service->all( $request->all() );
 
-        return view( 'app.location.index', compact( 'data' ) );
+        return view( 'app.category.index', compact( 'data' ) );
     }
 
     /**
@@ -44,8 +45,14 @@ class CategoryController extends Controller
         ] );
 
         try {
-            $this->service->store( $request->all() );
-            Session::flash( 'alert-success', 'Success! Location saved successfully.' );
+            $data = $request->all();
+
+            if($request->hasFile('image')) {
+                $data['photo_url'] = 'storage/'. (new FileManager())->upload($request->image, 'uploads/images/categories');
+            }
+
+            $this->service->store( $data );
+            Session::flash( 'alert-success', 'Success! Category saved successfully.' );
 
             return response()->json( [ 'responseCode' => 1 ] );
         } catch ( \Exception $e ) {
@@ -65,7 +72,7 @@ class CategoryController extends Controller
     {
         $data = $this->service->getById( $id );
 
-        return view( 'app.location.view', [ 'location' => $data ] );
+        return view( 'app.category.view', [ 'category' => $data ] );
     }
 
     /**
@@ -73,9 +80,9 @@ class CategoryController extends Controller
      */
     public function create ()
     {
-        $url = route( 'locations.store' );
+        $url = route( 'categories.store' );
 
-        return view( 'app.location.form', compact( 'url' ) );
+        return view( 'app.category.form', compact( 'url' ) );
     }
 
     /**
@@ -85,10 +92,10 @@ class CategoryController extends Controller
      */
     public function edit ( $id )
     {
-        $url = route( 'locations.update', $id );
-        $location = $this->service->getById( $id );
+        $url = route( 'categories.update', $id );
+        $category = $this->service->getById( $id );
 
-        return view( 'app.location.form', compact( 'location', 'url' ) );
+        return view( 'app.category.form', compact( 'category', 'url' ) );
     }
 
     /**
@@ -100,14 +107,14 @@ class CategoryController extends Controller
      */
     public function update( $id, Request $request ) {
         $this->validate( $request, [
-            'location_name' => 'required',
+            'name' => 'required',
         ] );
 
         try {
             $this->service->update( $id , $request->all());
-            Session::flash( 'alert-success', 'Success! Location saved successfully.' );
+            Session::flash( 'alert-success', 'Success! Category saved successfully.' );
 
-            return response()->json(['success' => true, 'message' => 'Location update successful']);
+            return response()->json(['success' => true, 'message' => 'Category update successful']);
         } catch ( \Exception $e ) {
             Session::flash( 'alert-danger', 'Failed! Something went wrong.' );
 
@@ -125,7 +132,7 @@ class CategoryController extends Controller
     {
         try{
             $this->service->getById($id)->delete();
-            Session::flash( 'alert-success', 'Location Deleted Successfully' );
+            Session::flash( 'alert-success', 'Category Deleted Successfully' );
 
             return redirect()->back();
         } catch (\Exception $e) {
